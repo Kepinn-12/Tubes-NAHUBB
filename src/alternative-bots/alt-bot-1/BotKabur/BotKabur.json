@@ -1,0 +1,15 @@
+{
+  "name": "BotKabur",
+  "version": "1.0",
+  "authors": [
+    "Adit"
+  ],
+  "description": "This bot moves around in a crazy pattern.",
+  "homepage": "",
+  "countryCodes": [
+    "us",
+    "dk"
+  ],
+  "platform": ".Net 10.0",
+  "programmingLang": "C# 10.0"
+}
