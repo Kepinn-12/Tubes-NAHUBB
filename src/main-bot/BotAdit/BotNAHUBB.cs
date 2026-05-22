@@ -90,24 +90,6 @@ public class BotAdit : Bot
             TurnRate = rand.Next(-8, 9);
     }
 
-    // =====================================================
-    // GUN & RADAR
-    //
-    // LOGIKA RADAR (FIX UTAMA):
-    //
-    //   CASE 1 — Tidak ada musuh di dictionary sama sekali
-    //            → sweep penuh 360 terus
-    //
-    //   CASE 2 — Ada musuh, data masih segar (scanAge <= MaxScanAge)
-    //            → lock radar ke target, lakukan predictive aim + fire
-    //
-    //   CASE 3 — Ada musuh tapi data sudah basi (scanAge > MaxScanAge)
-    //            → JANGAN lock ke posisi lama, sweep aktif ke seluruh arena
-    //              sampai scan segar kembali
-    //
-    // Sebelumnya: CASE 3 melakukan radar lock ke posisi lama
-    // lalu return → radar stuck di tempat kosong.
-    // =====================================================
     private void DoGunAndRadar()
     {
         // ── CASE 1: Tidak ada data musuh sama sekali ───────────
@@ -159,14 +141,15 @@ public class BotAdit : Bot
         if (Math.Abs(gunTurn) < FireAngleThreshold &&
             TurnNumber - enemy.LastFiredAt >= FireCooldown){
             if (Energy < 60) {
-            SetFire(1);
+            Fire(1);
             }else{
             Fire(firePower);
+            
             enemy.LastFiredAt = TurnNumber;
         }
         // Ram jika musuh hampir mati
         if (enemy.Distance < 100 && enemy.Energy < 20)
-            TargetSpeed = 8;
+            TargetSpeed = 8;    
     }
     }
 
