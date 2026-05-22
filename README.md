@@ -33,23 +33,23 @@ Program dibuat menggunakan bahasa Java guna memenuhi "Tugas Besar  Stima 2025/20
     Pastikan project terload sebagai Maven Project
     
 3.  Build Project (Bot) 
-    1. Buka terminal.
-    2. Masuk ke dalam file robot pertama
-    3. Build dengan 'dotnet build'
+    - Buka terminal.
+    - Masuk ke dalam file robot pertama
+    - Build dengan 'dotnet build'
     
 4.  Install Bot ke Robocode
-    1. 111Buka menu config pada robocode.
-    2. Pili1h file src
+    - 111Buka menu config pada robocode.
+    - Pili1h file src
 
 5.  Jalankan Robocode
     Buka aplikasi Robocode
     Pilih:
-    1. Battle → Start Battle
-    2. Cari nama bot untuk diboot
+    - Battle → Start Battle
+    - Cari nama bot untuk diboot
 
 5.  Run Battle
-    1. Tambahkan bot ke arena
-    2. Klik Start Battle
+    - Tambahkan bot ke arena
+    - Klik Start Battle
   
 ## Contributors
 | Name  | NIM |
