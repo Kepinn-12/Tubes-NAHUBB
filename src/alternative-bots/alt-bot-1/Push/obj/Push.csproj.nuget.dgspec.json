@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\Push.csproj": {}
+    "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\Push.csproj": {}
   },
   "projects": {
-    "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\Push.csproj": {
+    "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\Push.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\Push.csproj",
+        "projectUniqueName": "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\Push.csproj",
         "projectName": "Push",
-        "projectPath": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\Push.csproj",
-        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\obj\\",
+        "projectPath": "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\Push.csproj",
+        "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"

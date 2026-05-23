@@ -2,7 +2,7 @@
   "name": "BotNAHUBB",
   "version": "1.1",
   "authors": ["NAHUBB"],
-  "description": "",
+  "description": "Uses a greedy strategy to maximize damage points, kill bonuses, and survival points through predictive targeting and dynamic movement that maintains a safe distance from enemies",
   "homepage": "",
   "countryCodes": ["id"],
   "platform": ".Net 10.0",

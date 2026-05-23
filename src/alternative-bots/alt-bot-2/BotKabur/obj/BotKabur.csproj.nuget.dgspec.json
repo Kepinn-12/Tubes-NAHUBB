@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-2\\BotKabur\\BotKabur.csproj": {}
+    "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-2\\BotKabur\\BotKabur.csproj": {}
   },
   "projects": {
-    "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-2\\BotKabur\\BotKabur.csproj": {
+    "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-2\\BotKabur\\BotKabur.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-2\\BotKabur\\BotKabur.csproj",
+        "projectUniqueName": "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-2\\BotKabur\\BotKabur.csproj",
         "projectName": "BotKabur",
-        "projectPath": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-2\\BotKabur\\BotKabur.csproj",
-        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-2\\BotKabur\\obj\\",
+        "projectPath": "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-2\\BotKabur\\BotKabur.csproj",
+        "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-2\\BotKabur\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
