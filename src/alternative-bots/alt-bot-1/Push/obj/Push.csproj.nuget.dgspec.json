@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Asus\\Downloads\\tubes1-if2211-starter-pack-1.0\\sample-bots-csharp-0.30.0\\Push\\Push.csproj": {}
+    "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\Push.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Asus\\Downloads\\tubes1-if2211-starter-pack-1.0\\sample-bots-csharp-0.30.0\\Push\\Push.csproj": {
+    "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\Push.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Asus\\Downloads\\tubes1-if2211-starter-pack-1.0\\sample-bots-csharp-0.30.0\\Push\\Push.csproj",
+        "projectUniqueName": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\Push.csproj",
         "projectName": "Push",
-        "projectPath": "C:\\Users\\Asus\\Downloads\\tubes1-if2211-starter-pack-1.0\\sample-bots-csharp-0.30.0\\Push\\Push.csproj",
+        "projectPath": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\Push.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Asus\\Downloads\\tubes1-if2211-starter-pack-1.0\\sample-bots-csharp-0.30.0\\Push\\obj\\",
+        "outputPath": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config"

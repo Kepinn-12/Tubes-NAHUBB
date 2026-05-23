@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fOmysgszbVo=",
+  "dgSpecHash": "IK1qyjlfnh0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Asus\\Downloads\\tubes1-if2211-starter-pack-1.0\\sample-bots-csharp-0.30.0\\Push\\Push.csproj",
+  "projectFilePath": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-1\\Push\\Push.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Asus\\.nuget\\packages\\jetbrains.annotations\\2025.2.4\\jetbrains.annotations.2025.2.4.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.configuration\\10.0.0\\microsoft.extensions.configuration.10.0.0.nupkg.sha512",

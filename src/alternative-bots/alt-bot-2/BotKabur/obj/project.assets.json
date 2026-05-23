@@ -732,11 +732,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Asus\\Downloads\\tubes1-if2211-starter-pack-1.0\\sample-bots-csharp-0.30.0\\BotKabur\\BotKabur.csproj",
+      "projectUniqueName": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-2\\Botkabur\\BotKabur.csproj",
       "projectName": "BotKabur",
-      "projectPath": "C:\\Users\\Asus\\Downloads\\tubes1-if2211-starter-pack-1.0\\sample-bots-csharp-0.30.0\\BotKabur\\BotKabur.csproj",
+      "projectPath": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-2\\Botkabur\\BotKabur.csproj",
       "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Asus\\Downloads\\tubes1-if2211-starter-pack-1.0\\sample-bots-csharp-0.30.0\\BotKabur\\obj\\",
+      "outputPath": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-2\\Botkabur\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config"
