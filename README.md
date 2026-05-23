@@ -39,7 +39,7 @@ Program dibuat menggunakan bahasa Java guna memenuhi "Tugas Besar  Stima 2025/20
     
 4.  Install Bot ke Robocode
     - 111Buka menu config pada robocode.
-    - Pili1h file src
+    - Pilih file src
 
 5.  Jalankan Robocode
     Buka aplikasi Robocode
