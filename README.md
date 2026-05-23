@@ -38,7 +38,7 @@ Program dibuat menggunakan bahasa Java guna memenuhi "Tugas Besar  Stima 2025/20
     - Build dengan 'dotnet build'
     
 4.  Install Bot ke Robocode
-    - 111Buka menu config pada robocode.
+    - Buka menu config pada robocode.
     - Pilih file src
 
 5.  Jalankan Robocode
