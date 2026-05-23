@@ -2,7 +2,7 @@
   "name": "ClosestHunter",
   "version": "1.0",
   "authors": ["NAHUBB"],
-  "description": "Ram and Attack",
+  "description": "Uses a greedy strategy focused on maximizing ram damage points by aggressively colliding with enemies while maintaining close-range pressure throughout the battle.",
   "homepage": "",
   "countryCodes": ["id"],
   "platform": ".Net 10.0",

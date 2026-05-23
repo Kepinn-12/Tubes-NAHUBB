@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-3\\ClosestHunter\\ClosestHunter.csproj": {}
+    "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-3\\ClosestHunter\\ClosestHunter.csproj": {}
   },
   "projects": {
-    "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-3\\ClosestHunter\\ClosestHunter.csproj": {
+    "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-3\\ClosestHunter\\ClosestHunter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-3\\ClosestHunter\\ClosestHunter.csproj",
+        "projectUniqueName": "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-3\\ClosestHunter\\ClosestHunter.csproj",
         "projectName": "ClosestHunter",
-        "projectPath": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-3\\ClosestHunter\\ClosestHunter.csproj",
-        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "D:\\Tubes_NAHUBB\\src\\alternative-bots\\alt-bot-3\\ClosestHunter\\obj\\",
+        "projectPath": "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-3\\ClosestHunter\\ClosestHunter.csproj",
+        "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\muham\\Tubes-NAHUBB\\src\\alternative-bots\\alt-bot-3\\ClosestHunter\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
