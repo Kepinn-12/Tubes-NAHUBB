@@ -1,8 +1,8 @@
 {
-  "name": "CEF",
+  "name": "ClosestHunter",
   "version": "1.0",
   "authors": ["NAHUBB"],
-  "description": "Scanning Bot with low HP to attack ",
+  "description": "Ram and Attack",
   "homepage": "",
   "countryCodes": ["id"],
   "platform": ".Net 10.0",

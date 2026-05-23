@@ -140,7 +140,7 @@ public class BotNAHUBB : Bot
         // Tembak hanya jika gun lurus + cooldown habis
         if (Math.Abs(gunTurn) < FireAngleThreshold &&
             TurnNumber - enemy.LastFiredAt >= FireCooldown){
-            if (Energy < 60) {
+            if (Energy < 30) {
             Fire(1);
             }else{
             Fire(firePower);

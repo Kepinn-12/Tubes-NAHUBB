@@ -1,152 +1,278 @@
 using System;
-using Robocode.TankRoyale.BotApi.Graphics;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using Robocode.TankRoyale.BotApi;
 using Robocode.TankRoyale.BotApi.Events;
 
 public class BotKabur : Bot
 {
-    private Dictionary<int, (double Energy, double X, double Y)> scannedEnemies = new();
+    // ===== ENEMY TRACKING =====
+    private Dictionary<int, EnemyData> enemies = new();
 
+    private class EnemyData
+    {
+        public double X;
+        public double Y;
+        public double Energy;
+        public double Distance;
+        public double Heading;
+        public double Speed;
+        public long LastSeen;
+        public long LastFiredAt;
+    }
+
+    // ===== MOVEMENT STATE =====
+    private int moveDirection = 1;
+    private readonly Random rand = new Random();
+    private const double WallMargin = 80.0;
+
+    // ===== TUNING =====
+    private const int    MaxScanAge         = 3;
+    private const double FireAngleThreshold = 3.0;
+    private const int    FireCooldown       = 5;
+    private const double DangerZone         = 200.0; // Jarak bahaya untuk kabur
+
+    // ===== RADAR STATE =====
+    private int radarSweepDir = 1;
+    private double sweepAccumulator = 0;
+
+    // =====================================================
     static void Main(string[] args) => new BotKabur().Start();
+    public BotKabur() : base(BotInfo.FromFile("BotKabur.json")) {}
 
-    BotKabur() : base(BotInfo.FromFile("BotKabur.json")) { }
-
+    // =====================================================
+    // RUN LOOP
+    // =====================================================
     public override void Run()
     {
-        BodyColor   = Color.Yellow;
-        TurretColor = Color.Navy;
-        RadarColor  = Color.Cyan;
-        BulletColor = Color.Red;
-        ScanColor   = Color.Cyan;
-        GunColor    = Color.White;
+        BodyColor   = Color.Black;
+        TurretColor = Color.Red;
+        RadarColor  = Color.DarkRed;
+        BulletColor = Color.Orange;
+        ScanColor   = Color.Yellow;
+        MaxSpeed    = 8;
 
         while (IsRunning)
         {
-            AttackLowestHpEnemy();
-            ScanArena();
-            FleeIfDanger();
+            CleanEnemies();
+            DoMovement();
+            DoGunAndRadar();
             Go();
         }
     }
 
+    // =====================================================
+    // MOVEMENT - KABUR DARI KERUMUNAN
+    // =====================================================
+    private void DoMovement()
+    {
+        // Prioritas 1: Kabur dari wall
+        if (IsNearWall())
+        {
+            double centerAngle = AngleTo(ArenaWidth / 2.0, ArenaHeight / 2.0);
+            double turnNeeded  = Normalize(centerAngle - Direction);
+            TurnRate           = Math.Sign(turnNeeded) * Math.Min(Math.Abs(turnNeeded), 10);
+            TargetSpeed        = 8;
+            return;
+        }
+
+        // Prioritas 2: Kabur dari kerumunan musuh
+        if (enemies.Count > 0)
+        {
+            // Hitung center of mass musuh
+            double crowdX = enemies.Values.Average(e => e.X);
+            double crowdY = enemies.Values.Average(e => e.Y);
+            double distToCrowd = Math.Sqrt(Math.Pow(X - crowdX, 2) + Math.Pow(Y - crowdY, 2));
+
+            // Cari musuh terdekat
+            var nearest = enemies.Values.OrderBy(e => e.Distance).First();
+
+            // Jika ada musuh dekat, kabur dari dia
+            if (nearest.Distance < DangerZone)
+            {
+                // Kabur berlawanan arah dari musuh terdekat
+                double escapeAngle = AngleTo(nearest.X, nearest.Y) + 180;
+                double turnNeeded  = Normalize(escapeAngle - Direction);
+                TurnRate           = Math.Sign(turnNeeded) * Math.Min(Math.Abs(turnNeeded), 10);
+                TargetSpeed        = 8;
+                return;
+            }
+
+            // Jika kerumunan terlalu dekat, kabur dari center of mass
+            if (distToCrowd < DangerZone * 1.5)
+            {
+                double escapeAngle = AngleTo(crowdX, crowdY) + 180;
+                double turnNeeded  = Normalize(escapeAngle - Direction);
+                TurnRate           = Math.Sign(turnNeeded) * Math.Min(Math.Abs(turnNeeded), 8);
+                TargetSpeed        = 7;
+                return;
+            }
+        }
+
+        // Default: Gerakan unpredictable
+        TargetSpeed = 6;
+        if (TurnNumber % 30 == 0)
+            TurnRate = rand.Next(-8, 9);
+    }
+
+    // =====================================================
+    // GUN & RADAR
+    // =====================================================
+    private void DoGunAndRadar()
+    {
+        if (enemies.Count == 0)
+        {
+            SweepRadar();
+            return;
+        }
+
+        // Prioritas target: musuh terdekat dengan energi rendah
+        var targetKv = enemies
+            .OrderBy(e => e.Value.Distance * 0.5 + e.Value.Energy * 3.0)
+            .First();
+
+        EnemyData enemy  = targetKv.Value;
+        long      scanAge = TurnNumber - enemy.LastSeen;
+
+        if (scanAge > MaxScanAge)
+        {
+            SweepRadar();
+            return;
+        }
+
+        // Radar lock
+        double dirToEnemy = AngleTo(enemy.X, enemy.Y);
+        double radarTurn  = Normalize(dirToEnemy - RadarDirection);
+        SetTurnRadarLeft(radarTurn * 2.0);
+
+        // Predictive aiming
+        double firePower   = CalculateFirePower(enemy);
+        double bulletSpeed = 20.0 - 3.0 * firePower;
+        double travelTime  = enemy.Distance / bulletSpeed;
+
+        double headingRad = enemy.Heading * Math.PI / 180.0;
+        double predictedX = Clamp(enemy.X + Math.Cos(headingRad) * enemy.Speed * travelTime,
+                                  20, ArenaWidth  - 20);
+        double predictedY = Clamp(enemy.Y + Math.Sin(headingRad) * enemy.Speed * travelTime,
+                                  20, ArenaHeight - 20);
+
+        double aimAngle = AngleTo(predictedX, predictedY);
+        double gunTurn  = Normalize(aimAngle - GunDirection);
+        SetTurnGunLeft(gunTurn);
+
+        // Fire
+        if (Math.Abs(gunTurn) < FireAngleThreshold &&
+            TurnNumber - enemy.LastFiredAt >= FireCooldown)
+        {
+            Fire(firePower);
+            enemy.LastFiredAt = TurnNumber;
+        }
+    }
+
+    // =====================================================
+    // SWEEP RADAR
+    // =====================================================
+    private void SweepRadar()
+    {
+        double step = 45.0;
+        sweepAccumulator += step;
+
+        if (sweepAccumulator >= 180)
+        {
+            radarSweepDir    *= -1;
+            sweepAccumulator  = 0;
+        }
+
+        if (radarSweepDir > 0)
+            SetTurnRadarRight(step);
+        else
+            SetTurnRadarLeft(step);
+    }
+
+    // =====================================================
+    // FIREPOWER
+    // =====================================================
+    private double CalculateFirePower(EnemyData enemy)
+    {
+        if (enemy.Energy   < 15)  return 3.0;
+        if (enemy.Distance < 120) return 3.0;
+        if (enemy.Distance < 300) return 2.0;
+        return 1.0;
+    }
+
+    // =====================================================
+    // EVENTS
+    // =====================================================
     public override void OnScannedBot(ScannedBotEvent e)
     {
-        scannedEnemies[e.ScannedBotId] = (e.Energy, e.X, e.Y);
-        Console.WriteLine($"Detected Bot ID:{e.ScannedBotId} | HP:{e.Energy} | Pos:({e.X:F1}, {e.Y:F1})");
-    }
+        if (!enemies.TryGetValue(e.ScannedBotId, out var existing))
+            existing = new EnemyData();
 
-    private void AttackLowestHpEnemy()
-    {
-        if (scannedEnemies.Count == 0) return;
+        existing.X        = e.X;
+        existing.Y        = e.Y;
+        existing.Energy   = e.Energy;
+        existing.Distance = DistanceTo(e.X, e.Y);
+        existing.Heading  = e.Direction;
+        existing.Speed    = e.Speed;
+        existing.LastSeen = TurnNumber;
 
-        int    targetId = -1;
-        double lowestHp = double.MaxValue;
-        double targetX  = 0;
-        double targetY  = 0;
-
-        foreach (var (id, data) in scannedEnemies)
-        {
-            if (data.Energy < lowestHp)
-            {
-                lowestHp = data.Energy;
-                targetId = id;
-                targetX  = data.X;
-                targetY  = data.Y;
-            }
-        }
-
-        Console.WriteLine($"[GREEDY] Targeting Bot ID:{targetId} with HP:{lowestHp}");
-
-        double radarTurn = RadarBearingTo(targetX, targetY);
-        SetTurnRadarLeft(2 * radarTurn);
-
-        double gunBearing = GunBearingTo(targetX, targetY);
-        SetTurnGunLeft(gunBearing);
-
-        double firePower = lowestHp < 50 ? 4 : 2;
-        SetFire(firePower);
-    }
-
-    // Kabur jika ada musuh terlalu dekat atau banyak musuh di sekitar
-    private void FleeIfDanger()
-    {
-        if (scannedEnemies.Count == 0) return;
-
-        int    nearCount   = 0;
-        double nearestDist = double.MaxValue;
-        double nearestX    = 0;
-        double nearestY    = 0;
-
-        foreach (var (id, data) in scannedEnemies)
-        {
-            double dist = DistanceTo(data.X, data.Y);
-            if (dist < 250)
-            {
-                nearCount++;
-                if (dist < nearestDist)
-                {
-                    nearestDist = dist;
-                    nearestX    = data.X;
-                    nearestY    = data.Y;
-                }
-            }
-        }
-
-        // Kabur jika terlalu dekat (< 150px) atau dikelilingi (>= 2 musuh dekat)
-        if (nearestDist < 150 || nearCount >= 2)
-        {
-            Console.WriteLine($"[FLEE] {nearCount} enemy nearby! Fleeing...");
-            double fleeBearing = BearingTo(nearestX, nearestY) + 180;
-            SetTurnLeft(fleeBearing);
-            SetForward(120);
-        }
-    }
-
-    private void ScanArena()
-    {
-        SetTurnRadarLeft(360);
-    }
-
-    public override void OnHitBot(HitBotEvent e)
-    {
-        var body = BearingTo(e.X, e.Y);
-        if (body > -10 && body < 10)
-        {
-            SetFire(3);
-        }
-        if (e.IsRammed)
-        {
-            SetTurnLeft(10);
-        }
+        enemies[e.ScannedBotId] = existing;
     }
 
     public override void OnHitWall(HitWallEvent e)
     {
-        Console.WriteLine("Kena dinding! Balik arah...");
-        SetBack(150);
-        SetTurnRight(45);
+        moveDirection *= -1;
+        TargetSpeed    = 8 * moveDirection;
+        TurnRate       = rand.Next(60, 121) * moveDirection;
     }
 
-    public override void OnBotDeath(BotDeathEvent e)
+    public override void OnHitBot(HitBotEvent e)
     {
-        if (scannedEnemies.ContainsKey(e.VictimId))
-        {
-            scannedEnemies.Remove(e.VictimId);
-            Console.WriteLine($"[KILL] Bot#{e.VictimId} eliminated!");
-        }
+        Fire(3);
+        moveDirection *= -1;
+        TargetSpeed    = 8 * moveDirection;
     }
 
     public override void OnHitByBullet(HitByBulletEvent e)
     {
-        SetTurnRight(45);
-        SetForward(50);
+        moveDirection *= -1;
+        TurnRate       = rand.Next(-12, 13);
+        TargetSpeed    = 8 * moveDirection;
     }
 
-    private double DistanceTo(double x, double y)
+    public override void OnBotDeath(BotDeathEvent e)
     {
-        double dx = x - X;
-        double dy = y - Y;
-        return Math.Sqrt(dx * dx + dy * dy);
+        enemies.Remove(e.VictimId);
     }
+
+    // =====================================================
+    // HELPERS
+    // =====================================================
+    private void CleanEnemies()
+    {
+        var stale = enemies
+            .Where(x => TurnNumber - x.Value.LastSeen > 10)
+            .Select(x => x.Key)
+            .ToList();
+        foreach (var id in stale)
+            enemies.Remove(id);
+    }
+
+    private bool IsNearWall() =>
+        X < WallMargin || X > ArenaWidth  - WallMargin ||
+        Y < WallMargin || Y > ArenaHeight - WallMargin;
+
+    private double AngleTo(double x, double y) =>
+        Math.Atan2(y - Y, x - X) * 180.0 / Math.PI;
+
+    private static double Normalize(double angle)
+    {
+        while (angle >  180) angle -= 360;
+        while (angle < -180) angle += 360;
+        return angle;
+    }
+
+    private static double Clamp(double v, double min, double max) =>
+        Math.Max(min, Math.Min(max, v));
 }

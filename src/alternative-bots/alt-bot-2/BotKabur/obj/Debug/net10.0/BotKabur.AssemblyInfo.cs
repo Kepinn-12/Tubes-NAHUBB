@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BotKabur")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56046d8f844a012c26aa653f28bebf0e024233c6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5e916db60c9097ff18be24d139250fb433b748db")]
 [assembly: System.Reflection.AssemblyProductAttribute("BotKabur")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BotKabur")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
