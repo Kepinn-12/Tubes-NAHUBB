@@ -1,7 +1,14 @@
 # Tubes_NAHUBB
 
 ## General Information
-Program dibuat menggunakan bahasa Java guna memenuhi "Tugas Besar  Stima 2025/2026". Algoritma greedy yang diimplementasikan ialah menggunakan pendekatan nilai heuristik untuk tiap aksi yang dapat dilakukan oleh bot pada , kemudian mengambil aksi dengan nilai heuristik tertinggi.
+Program dibuat menggunakan bahasa C# guna memenuhi "Tugas Besar  Stima 2025/2026". Algoritma greedy  dipilih untuk diimplementasikan adalah Predictive Evasive Strategy. Dengan heuristik memilih pergerakan paling aman berdasarkan arah serangan musuh serta memprediksi posisi target untuk meningkatkan akurasi tembakan.  
+Karakteristik:
+- Memiliki kemampuan menghindari serangan dengan lebih baik.
+- Menggunakan predictive aiming sehingga akurasi tembakan lebih tinggi.
+- Mampu menjaga jarak aman sambil tetap memberikan serangan kepada lawan.
+- Pergerakan lebih sulit diprediksi karena menggunakan evasive movement.
+- Memiliki performa yang lebih stabil dibanding strategi lain.
+
 
 ## Program Requirement
 * **Java 17** <br>
