@@ -2,6 +2,7 @@
 
 ## General Information
 Program dibuat menggunakan bahasa C# guna memenuhi "Tugas Besar  Stima 2025/2026". Algoritma greedy  dipilih untuk diimplementasikan adalah Predictive Evasive Strategy. Dengan heuristik memilih pergerakan paling aman berdasarkan arah serangan musuh serta memprediksi posisi target untuk meningkatkan akurasi tembakan.  
+
 Karakteristik:
 - Memiliki kemampuan menghindari serangan dengan lebih baik.
 - Menggunakan predictive aiming sehingga akurasi tembakan lebih tinggi.
