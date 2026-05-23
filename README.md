@@ -9,26 +9,15 @@ Program dibuat menggunakan bahasa Java guna memenuhi "Tugas Besar  Stima 2025/20
 * **Robocode** <br>
 * **.Net 10** <br>
 
-<!-- ## Getting Started
-1. Clone Repository
-   ```sh
-   git clone https://github.com/Kepinn-12/Tubes-NAHUBB.git
-   ```
-2. Buka folder "Tubes-NAHUBB"
-3. Pilih "view" → "Tool Windows" → "Maven"
-4. Pilih "JavaBot" → "Lifecycle"
-5. Double klik "package"
-
-   ``` -->
-
 ## Getting Started
 
 1.  Clone Repository
-    git clone https://github.com/Kepinn-12/Tubes-NAHUBB.git
-
+   ```sh
+   git clone https://github.com/Kepinn-12/Tubes-NAHUBB.git
+   ```
 2.  Buka Project
     - Gunakan VS Code
-    - Pastikan sudah berada pada file tubes.
+    - Pastikan sudah berada pada file tubes
     
 3.  Build Project (Bot) 
     - Buka terminal.
@@ -39,18 +28,18 @@ Program dibuat menggunakan bahasa Java guna memenuhi "Tugas Besar  Stima 2025/20
 4. Buka cmd pada folder "Target", bot dapat dijalankan dengan:
    ```sh
    java -jar JavaBot.jar
-    
-4.  Install Bot ke Robocode
+    ```
+5.  Install Bot ke Robocode
     - Buka menu config pada robocode.
     - Pilih file src
 
-5.  Jalankan Robocode
+6.  Jalankan Robocode
     Buka aplikasi Robocode
     Pilih:
     - Battle 
     - Cari nama bot untuk diboot
 
-5.  Run Battle
+7.  Run Battle
     - Tambahkan bot ke arena
     - Klik Start Battle
   
